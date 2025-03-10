@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Preprocessing API
+  description: API for extracting specific values from datasets
+  version: 1.0.0
+
+paths:
+  /datasets/{dataset_id}/values:
+    get:
+      summary: Extract values from dataset
+      description: Extracts values for a specified event type within a time period.
+      parameters:
+        - name: dataset_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: event_type
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Values extracted successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
