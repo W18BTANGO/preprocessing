@@ -1,0 +1,16 @@
+[
+    {
+        "district_code": 101,
+        "property_id": 1,
+        "price": 500000,
+        "land_area": 300.5,
+        "contract_date": "2024-03-01"
+    },
+    {
+        "district_code": 102,
+        "property_id": 2,
+        "price": 600000,
+        "land_area": 350.5,
+        "contract_date": "2024-03-02"
+    }
+]
