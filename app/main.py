@@ -11,9 +11,14 @@ class FilterCriteria(BaseModel):
 
 class PreprocessRequest(BaseModel):
     json_data: Dict[str, Any]
+    # TO DO: CHANGE TO LIST OF EVENT TYPES
+    # TO DO: MAKE DEFAULT NO FILTERING
     event_type: str
+    # TO DO: MAKE DEFAULT NO FILTERING
     filters: List[FilterCriteria]
+    # TO DO: MAKE DEFAULT ALL ATTRIBUTES
     include_attributes: List[str]
+    # TO DO: MAKE DEFAULT ALL TIME RANGES
     start_timestamp: Optional[str] = None  # ISO 8601 format
     end_timestamp: Optional[str] = None  # ISO 8601 format
 
