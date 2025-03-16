@@ -1,16 +1,16 @@
 {
-    "data": {
+    "json_data": {
         "data_source": "nsw housing",
         "dataset_type": "house sales",
         "dataset_id": "http://bucket-name.s3-website-Region.amazonaws.com",
         "time_object": {
-            "timestamp": "2023-02-12 07:52:02.921420",
+            "timestamp": "2023-02-12T07:52:02.921420",
             "timezone": "GMT+11"
         },
         "events": [
             {
                 "time_object": {
-                    "timestamp": "2019-07-21 13:04:40.3401012",
+                    "timestamp": "2019-07-21T13:04:40.340101",
                     "duration": 1,
                     "duration_unit": "second",
                     "timezone": "GMT+11"
@@ -24,7 +24,7 @@
             },
             {
                 "time_object": {
-                    "timestamp": "2019-03-21 18:11:40.3401012",
+                    "timestamp": "2019-03-21T18:11:40.340101",
                     "duration": 1,
                     "duration_unit": "second",
                     "timezone": "GMT+11"
@@ -38,7 +38,7 @@
             },
             {
                 "time_object": {
-                    "timestamp": "2020-06-15 10:30:00.123456",
+                    "timestamp": "2020-06-15T10:30:00.123456",
                     "duration": 1,
                     "duration_unit": "second",
                     "timezone": "GMT+11"
@@ -53,9 +53,12 @@
         ]
     },
     "event_type": "house sale",
-    "attribute_filters": {
-        "suburb": ["Balmain", "Glebe"]
-    },
+    "filters": [
+        {
+            "attribute": "suburb",
+            "values": ["Balmain", "Glebe"]
+        }
+    ],
     "include_attributes": ["price", "suburb"],
     "start_timestamp": "2019-01-01T00:00:00",
     "end_timestamp": "2020-01-01T00:00:00"

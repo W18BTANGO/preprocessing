@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
-from preprocessing import process_data
+from app.preprocessing import process_data
 
 app = FastAPI(title="Preprocessing API", description="API for extracting specific values from datasets", version="1.0.0")
 
@@ -13,7 +13,7 @@ class PreprocessRequest(BaseModel):
     json_data: Dict[str, Any]
     event_type: str
     filters: List[FilterCriteria]
-    return_attributes: List[str]
+    include_attributes: List[str]
     start_timestamp: Optional[str] = None  # ISO 8601 format
     end_timestamp: Optional[str] = None  # ISO 8601 format
 
@@ -45,7 +45,7 @@ async def filter_data(request: PreprocessRequest):
             request.json_data,
             request.event_type,
             request.filters,
-            request.return_attributes,
+            request.include_attributes,
             request.start_timestamp,
             request.end_timestamp
         )
