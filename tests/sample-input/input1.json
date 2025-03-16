@@ -1,0 +1,62 @@
+{
+    "data": {
+        "data_source": "nsw housing",
+        "dataset_type": "house sales",
+        "dataset_id": "http://bucket-name.s3-website-Region.amazonaws.com",
+        "time_object": {
+            "timestamp": "2023-02-12 07:52:02.921420",
+            "timezone": "GMT+11"
+        },
+        "events": [
+            {
+                "time_object": {
+                    "timestamp": "2019-07-21 13:04:40.3401012",
+                    "duration": 1,
+                    "duration_unit": "second",
+                    "timezone": "GMT+11"
+                },
+                "event_type": "house sale",
+                "attribute": {
+                    "price": 1600000,
+                    "suburb": "Balmain",
+                    "attr3": false
+                }
+            },
+            {
+                "time_object": {
+                    "timestamp": "2019-03-21 18:11:40.3401012",
+                    "duration": 1,
+                    "duration_unit": "second",
+                    "timezone": "GMT+11"
+                },
+                "event_type": "house sale",
+                "attribute": {
+                    "price": 2800000,
+                    "suburb": "Glebe",
+                    "attr3": false
+                }
+            },
+            {
+                "time_object": {
+                    "timestamp": "2020-06-15 10:30:00.123456",
+                    "duration": 1,
+                    "duration_unit": "second",
+                    "timezone": "GMT+11"
+                },
+                "event_type": "apartment sale",
+                "attribute": {
+                    "price": 750000,
+                    "suburb": "Parramatta",
+                    "attr3": true
+                }
+            }
+        ]
+    },
+    "event_type": "house sale",
+    "attribute_filters": {
+        "suburb": ["Balmain", "Glebe"]
+    },
+    "include_attributes": ["price", "suburb"],
+    "start_timestamp": "2019-01-01T00:00:00",
+    "end_timestamp": "2020-01-01T00:00:00"
+}
