@@ -1,8 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
-import json
-from preprocess import preprocess_data
+from preprocessing import process_data
 
 app = FastAPI(title="Preprocessing API", description="API for extracting specific values from datasets", version="1.0.0")
 
