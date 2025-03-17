@@ -1,45 +1,59 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import pandas as pd
-import json
-import os
-
+from typing import List, Dict, Any, Optional
+from app.preprocessing import process_data
 
 app = FastAPI(title="Preprocessing API", description="API for extracting specific values from datasets", version="1.0.0")
 
+class FilterCriteria(BaseModel):
+    attribute: str
+    values: List[Any]
+
 class PreprocessRequest(BaseModel):
-    file_path: str  # Path to the JSON file to preprocess
+    json_data: Dict[str, Any]
+    # TO DO: CHANGE TO LIST OF EVENT TYPES
+    # TO DO: MAKE DEFAULT NO FILTERING
+    event_type: str
+    # TO DO: MAKE DEFAULT NO FILTERING
+    filters: List[FilterCriteria]
+    # TO DO: MAKE DEFAULT ALL ATTRIBUTES
+    include_attributes: List[str]
+    # TO DO: MAKE DEFAULT ALL TIME RANGES
+    start_timestamp: Optional[str] = None  # ISO 8601 format
+    end_timestamp: Optional[str] = None  # ISO 8601 format
 
-def preprocess_data(file_path: str):
-    # Load the JSON data
-    with open(file_path, 'r') as f:
-        data = json.load(f)
 
-    # Convert the JSON data into a DataFrame for easier processing
-    df = pd.json_normalize(data)  # Flatten the JSON structure
+@app.post("/filter-data")
+async def filter_data(request: PreprocessRequest):
+    """
+    Filters a dataset based on event type, attributes, and a time range.
 
-    # Perform any preprocessing here, like handling missing values, normalizing data, etc.
+    Parameters:
+    - `data` (dict): A JSON object which is the dataset to be filtered.
+    - `event_type` (str): The type of event to filter by.
+    - `filters` (List[FilterCriteria]): A list of attribute-value filters to apply.
+    - `include_attributes` (List[str]): A list of attributes to include in the response.
+    - `start_timestamp` (str, optional): The start timestamp for filtering events.
+    - `end_timestamp` (str, optional): The end timestamp for filtering events.
+
+    Returns:
+    - `dict`: A JSON object containing the filtered dataset.
+    """
+    if not request.json_data:
+        raise HTTPException(status_code=400, detail="No JSON data provided")
     
-    # Example: Handle missing values by filling NaN with a default value
-    df.fillna(0, inplace=True)
+    if "events" not in request.json_data:
+        raise HTTPException(status_code=400, detail="Invalid JSON format: Missing 'events' key")
     
-    # Example: Standardize numeric columns (you can extend this to any column)
-    numeric_columns = df.select_dtypes(include=['float64', 'int64']).columns
-    df[numeric_columns] = df[numeric_columns].apply(lambda x: (x - x.mean()) / x.std())
-
-    return df
-
-@app.get("/standardize")
-async def standardize_data(file_path: str):
-    """Endpoint to standardize data and return the transformed result."""
-    if not file_path:
-        raise HTTPException(status_code=404, detail="No file provided")
-    if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="File not found")
-
     try:
-        preprocessed_df = preprocess_data(file_path)
-        standardized_data = preprocessed_df.to_dict(orient="records")
-        return {"status": "success", "message": "Data standardized successfully", "data": standardized_data}
+        filtered_data = process_data(
+            request.json_data,
+            request.event_type,
+            request.filters,
+            request.include_attributes,
+            request.start_timestamp,
+            request.end_timestamp
+        )
+        return {"status": "success", "filtered_data": filtered_data}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
