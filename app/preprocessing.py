@@ -3,9 +3,9 @@ from datetime import datetime
 
 def process_data(
     data: Dict[str, Any],
-    event_type: str,
-    filters: List[Any],  # Accepting any object that has `.attribute` and `.values`
-    include_attributes: List[str],
+    event_types: List[str],  # Updated to support multiple event types
+    filters: Optional[List[Any]] = None,  # Optional filters
+    include_attributes: Optional[List[str]] = None,  # Optional attributes
     start_timestamp: Optional[str] = None,
     end_timestamp: Optional[str] = None
 ) -> List[Dict[str, Any]]:
@@ -38,7 +38,7 @@ def process_data(
 
     def event_matches(event: Dict[str, Any]) -> bool:
         """Checks if an event meets the filter criteria."""
-        if event.get("event_type") != event_type:
+        if event.get("event_type") not in event_types:
             return False
 
         event_time_str = event.get("time_object", {}).get("timestamp")
@@ -53,16 +53,13 @@ def process_data(
                 return False  # Skip events with invalid timestamps
 
         # Check attribute filters
-        attributes = event.get("attribute", {})
-        for filter_ in filters:
-            if hasattr(filter_, "attribute") and hasattr(filter_, "values"):
-                attr_name = filter_.attribute
-                allowed_values = set(filter_.values)
-            else:
-                continue  # Skip invalid filter objects
-
-            if attr_name in attributes and attributes[attr_name] not in allowed_values:
-                return False
+        if filters:
+            attributes = event.get("attribute", {})
+            for filter_ in filters:
+                if hasattr(filter_, "attribute") and hasattr(filter_, "values"):
+                    attr_name, allowed_values = filter_.attribute, set(filter_.values)
+                    if attr_name in attributes and attributes[attr_name] not in allowed_values:
+                        return False
 
         return True
 

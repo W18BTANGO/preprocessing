@@ -52,7 +52,7 @@
             }
         ]
     },
-    "event_type": "house sale",
+    "event_type": ["house sale"],
     "filters": [
         {
             "attribute": "suburb",

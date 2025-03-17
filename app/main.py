@@ -10,50 +10,40 @@ class FilterCriteria(BaseModel):
     values: List[Any]
 
 class PreprocessRequest(BaseModel):
-    json_data: Dict[str, Any]
-    # TO DO: CHANGE TO LIST OF EVENT TYPES
-    # TO DO: MAKE DEFAULT NO FILTERING
-    event_type: str
-    # TO DO: MAKE DEFAULT NO FILTERING
-    filters: List[FilterCriteria]
-    # TO DO: MAKE DEFAULT ALL ATTRIBUTES
-    include_attributes: List[str]
-    # TO DO: MAKE DEFAULT ALL TIME RANGES
-    start_timestamp: Optional[str] = None  # ISO 8601 format
-    end_timestamp: Optional[str] = None  # ISO 8601 format
+    json_data: Dict[str, Any] = None
+    event_type: Optional[List[str]] = []  # Default: No filtering by event type
+    filters: Optional[List[FilterCriteria]] = []  # Default: No filtering
+    include_attributes: Optional[List[str]] = None  # Default: Include all attributes
+    start_timestamp: Optional[str] = None
+    end_timestamp: Optional[str] = None
 
 
 @app.post("/filter-data")
 async def filter_data(request: PreprocessRequest):
-    """
-    Filters a dataset based on event type, attributes, and a time range.
-
-    Parameters:
-    - `data` (dict): A JSON object which is the dataset to be filtered.
-    - `event_type` (str): The type of event to filter by.
-    - `filters` (List[FilterCriteria]): A list of attribute-value filters to apply.
-    - `include_attributes` (List[str]): A list of attributes to include in the response.
-    - `start_timestamp` (str, optional): The start timestamp for filtering events.
-    - `end_timestamp` (str, optional): The end timestamp for filtering events.
-
-    Returns:
-    - `dict`: A JSON object containing the filtered dataset.
-    """
-    if not request.json_data:
-        raise HTTPException(status_code=400, detail="No JSON data provided")
+    if request.json_data is None:
+        raise HTTPException(status_code=400, detail="Invalid JSON format: Missing 'json_data' key")
     
     if "events" not in request.json_data:
         raise HTTPException(status_code=400, detail="Invalid JSON format: Missing 'events' key")
-    
+
+    print("Received json_data:", request.json_data)
+    print("Event Types:", request.event_type)
+    print("Filters:", request.filters)
+    print("Include Attributes:", request.include_attributes)
+    print("Start Timestamp:", request.start_timestamp)
+    print("End Timestamp:", request.end_timestamp)
+
     try:
         filtered_data = process_data(
             request.json_data,
-            request.event_type,
-            request.filters,
-            request.include_attributes,
+            request.event_type or [],  
+            request.filters or None,  
+            request.include_attributes or None,
             request.start_timestamp,
             request.end_timestamp
         )
+        print("Filtered Data:", filtered_data)  # Debug output
         return {"status": "success", "filtered_data": filtered_data}
     except Exception as e:
+        print("Error:", str(e))  # Print error details
         raise HTTPException(status_code=500, detail=str(e))

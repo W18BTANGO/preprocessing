@@ -1,64 +1,67 @@
-import pytest
-from fastapi.testclient import TestClient
-from app.main import app 
 import json
+from fastapi.testclient import TestClient
+from app.main import app  # Ensure this is the correct import for your FastAPI app
 
-# Fixture to set up the TestClient
-@pytest.fixture
-def client():
-    return TestClient(app)
+client = TestClient(app)
 
-# Test case for the standardize endpoint with a valid file path
-def test_standardize_valid_file(client):
-    # Mock valid file path (the file should exist for this test to pass)
-    valid_file_path = "./tests/mock_data.json"  # Make sure this file exists in your test directory
-    
-    # Send GET request to standardize endpoint
-    response = client.get(f"/standardize?file_path={valid_file_path}")
-    
-    # Check the response status code
+def load_test_input(filepath):
+    with open(filepath, "r") as file:
+        return json.load(file)
+
+def test_filter_data():
+    test_input = load_test_input("tests/sample-input/input1.json")
+    response = client.post("/filter-data", json=test_input)
+    print(response.json())
     assert response.status_code == 200
+    response_json = response.json()
+    assert response_json["status"] == "success"
+    assert "filtered_data" in response_json
+    assert isinstance(response_json["filtered_data"], list)
     
-    # Check the response structure
-    data = response.json()
-    assert data["status"] == "success"
-    assert data["message"] == "Data standardized successfully"
-    
-    # Check that the returned data is standardized (you can modify this as per your actual logic)
-    assert isinstance(data["data"], list)  # Data should be in a list format
-    assert "district_code" in data["data"][0]
-    assert "price" in data["data"][0]
-    assert "land_area" in data["data"][0]
+    # Check expected filtered events
+    expected_filtered_events = [
+        {
+            "time_object": {
+                "timestamp": "2019-07-21T13:04:40.340101",
+                "duration": 1,
+                "duration_unit": "second",
+                "timezone": "GMT+11"
+            },
+            "event_type": "house sale",
+            "attribute": {
+                "price": 1600000,
+                "suburb": "Balmain"
+            }
+        },
+        {
+            "time_object": {
+                "timestamp": "2019-03-21T18:11:40.340101",
+                "duration": 1,
+                "duration_unit": "second",
+                "timezone": "GMT+11"
+            },
+            "event_type": "house sale",
+            "attribute": {
+                "price": 2800000,
+                "suburb": "Glebe"
+            }
+        }
+    ]
+    assert response_json["filtered_data"] == expected_filtered_events
 
-# Test case for the standardize endpoint when the file does not exist
-def test_standardize_file_not_found(client):
-    invalid_file_path = "./tests/non_existent_file.json"
-    
-    response = client.get(f"/standardize?file_path={invalid_file_path}")
-    
-    assert response.status_code == 404
-    data = response.json()
-    assert data["detail"] == "File not found"
+def test_invalid_json():
+    response = client.post("/filter-data", json={})
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Invalid JSON format: Missing 'json_data' key"
 
-# Test case for missing file_path parameter
-def test_standardize_missing_file_path(client):
-    response = client.get("/standardize")
-    
-    assert response.status_code == 422  # Validation error because 'file_path' is missing
-    data = response.json()
-    assert "detail" in data
-    assert "Field required" in str(data["detail"])
+def test_missing_events_key():
+    response = client.post("/filter-data", json={"json_data": {}})
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Invalid JSON format: Missing 'events' key"
 
-# Test case for standardizing empty or invalid data (you can simulate empty file content)
-def test_standardize_empty_data(client):
-    empty_file_path = "./tests/empty_mock_data.json"  # A file with an empty list or no valid data
-    
-    # Send GET request
-    response = client.get(f"/standardize?file_path={empty_file_path}")
-    
-    # Ensure we handle empty or invalid data
-    assert response.status_code == 200
-    data = response.json()
-    assert data["status"] == "success"
-    assert data["message"] == "Data standardized successfully"
-    assert data["data"] == []  # If no valid data, return an empty list or appropriate message
+def test_invalid_timestamp():
+    test_input = load_test_input("tests/sample-input/input1.json")
+    test_input["start_timestamp"] = "invalid-timestamp"
+    response = client.post("/filter-data", json=test_input)
+    assert response.status_code == 500
+    assert "Invalid start_timestamp format" in response.json()["detail"]
