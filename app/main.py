@@ -3,11 +3,17 @@ from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from app.preprocessing import process_data
 
-app = FastAPI(title="Preprocessing API", description="API for extracting specific values from datasets", version="1.0.0")
+app = FastAPI(
+    title="Preprocessing API",
+    description="API for extracting specific values from datasets",
+    version="1.0.0",
+)
+
 
 class FilterCriteria(BaseModel):
     attribute: str
     values: List[Any]
+
 
 class PreprocessRequest(BaseModel):
     json_data: Dict[str, Any] = None
@@ -21,10 +27,14 @@ class PreprocessRequest(BaseModel):
 @app.post("/filter-data")
 async def filter_data(request: PreprocessRequest):
     if request.json_data is None:
-        raise HTTPException(status_code=400, detail="Invalid JSON format: Missing 'json_data' key")
-    
+        raise HTTPException(
+            status_code=400, detail="Invalid JSON format: Missing 'json_data' key"
+        )
+
     if "events" not in request.json_data:
-        raise HTTPException(status_code=400, detail="Invalid JSON format: Missing 'events' key")
+        raise HTTPException(
+            status_code=400, detail="Invalid JSON format: Missing 'events' key"
+        )
 
     print("Received json_data:", request.json_data)
     print("Event Types:", request.event_type)
@@ -36,11 +46,11 @@ async def filter_data(request: PreprocessRequest):
     try:
         filtered_data = process_data(
             request.json_data,
-            request.event_type or [],  
-            request.filters or None,  
+            request.event_type or [],
+            request.filters or None,
             request.include_attributes or None,
             request.start_timestamp,
-            request.end_timestamp
+            request.end_timestamp,
         )
         print("Filtered Data:", filtered_data)  # Debug output
         return {"status": "success", "filtered_data": filtered_data}
