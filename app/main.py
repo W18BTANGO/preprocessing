@@ -2,8 +2,17 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from app.preprocessing import process_data
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Preprocessing API", description="API for extracting specific values from datasets", version="1.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 class FilterCriteria(BaseModel):
     attribute: str
