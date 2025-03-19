@@ -66,3 +66,9 @@ async def filter_data(request: PreprocessRequest):
         return {"status": "success", "filtered_data": filtered_data}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+
+@app.get("/")
+def health_check():
+    return {"status": "healthy", "microservice":"preprocessing" }
