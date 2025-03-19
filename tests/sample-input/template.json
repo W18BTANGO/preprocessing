@@ -1,39 +1,109 @@
 {
-    "data_source": "nsw housing",
-    "dataset_type": "house sales",
-    "dataset_id": "http://bucket-name.s3-website-Region.amazonaws.com",
-    "time_object": {
-      "timestamp": "2023-02-12 07:52:02.921420",
-      "timezone": "GMT+11"
-    },
-    "events": [
-      {
-        "time_object": {
-          "timestamp": "2019-07-21 13:04:40.3401012",
-          "duration": 1,
-          "duration_unit": "second",
+  "json_data": {
+      "data_source": "nsw housing",
+      "dataset_type": "house sales",
+      "dataset_id": "http://bucket-name.s3-website-Region.amazonaws.com",
+      "time_object": {
+          "timestamp": "2023-02-12T07:52:02.921420",
           "timezone": "GMT+11"
-        },
-        "event_type": "house sale",
-        "attribute": {
-          "price": 1600000,
-          "suburb": "Balmain",
-          "attr3": false
-        }
       },
-      {
-        "time_object": {
-          "timestamp": "2019-03-21 18:11:40.3401012",
-          "duration": 1,
-          "duration_unit": "second",
-          "timezone": "GMT+11"
-        },
-        "event_type": "house sale",
-        "attribute": {
-          "price": 2800000,
-          "suburb": "Glebe",
-          "attr3": false
-        }
-      }
-    ]
+      "events":
+          [
+              {
+                  "time_object": {
+                      "timestamp": "20240628",
+                      "duration": 0,
+                      "duration_unit": "day",
+                      "timezone": "AEDT"
+                  },
+                  "event_type": "sales report",
+                  "attribute": {
+                      "transaction_id": "AU433785",
+                      "district_code": 10,
+                      "property_id": 3401943,
+                      "price": 945000,
+                      "property_name": "Unknown",
+                      "unit_number": null,
+                      "street_number": "22",
+                      "street_name": "COVENTRY PL",
+                      "suburb": "NELSON BAY",
+                      "postcode": "2315",
+                      "land_area": 291.3,
+                      "area_unit": "M",
+                      "contract_date": "20240628",
+                      "settlement_date": "20240920",
+                      "zoning_code": "R2",
+                      "property_type": "RESIDENCE",
+                      "sale_type": "R",
+                      "nature_of_property": ""
+                  }
+              },
+              {
+                  "time_object": {
+                      "timestamp": "20240829",
+                      "duration": 0,
+                      "duration_unit": "day",
+                      "timezone": "AEDT"
+                  },
+                  "event_type": "sales report",
+                  "attribute": {
+                      "transaction_id": "AU448417",
+                      "district_code": 10,
+                      "property_id": 2971727,
+                      "price": 1550000,
+                      "property_name": "Unknown",
+                      "unit_number": null,
+                      "street_number": "10",
+                      "street_name": "JACKSON CL",
+                      "suburb": "SALAMANDER BAY",
+                      "postcode": "2317",
+                      "land_area": 602.6,
+                      "area_unit": "M",
+                      "contract_date": "20240829",
+                      "settlement_date": "20240926",
+                      "zoning_code": "R2",
+                      "property_type": "RESIDENCE",
+                      "sale_type": "R",
+                      "nature_of_property": ""
+                  }
+              },
+              {
+                  "time_object": {
+                      "timestamp": "20240813",
+                      "duration": 0,
+                      "duration_unit": "day",
+                      "timezone": "AEDT"
+                  },
+                  "event_type": "sales report",
+                  "attribute": {
+                      "transaction_id": "AU441932",
+                      "district_code": 10,
+                      "property_id": 285585,
+                      "price": 311750,
+                      "property_name": "Unknown",
+                      "unit_number": "10",
+                      "street_number": "324",
+                      "street_name": "SOLDIERS POINT RD",
+                      "suburb": "SALAMANDER BAY",
+                      "postcode": "2317",
+                      "land_area": null,
+                      "area_unit": "",
+                      "contract_date": "20240813",
+                      "settlement_date": "20240924",
+                      "zoning_code": "",
+                      "property_type": "FACTORY",
+                      "sale_type": "3",
+                      "nature_of_property": "10"
+                  }
+              }
+      ]
+  },
+  "event_type": ["sales report"],
+  "filters": [{
+    "attribute": "suburb",
+    "values": ["NELSON BAY"]
+  }],
+  "include_attributes": ["price", "suburb"],
+  "start_timestamp": "2023-01-01T00:00:00",
+  "end_timestamp": "2025-01-01T00:00:00"
 }

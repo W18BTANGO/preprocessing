@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware  # Import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from app.preprocessing import process_data
@@ -9,6 +10,14 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 class FilterCriteria(BaseModel):
     attribute: str
@@ -35,13 +44,6 @@ async def filter_data(request: PreprocessRequest):
         raise HTTPException(
             status_code=400, detail="Invalid JSON format: Missing 'events' key"
         )
-
-    print("Received json_data:", request.json_data)
-    print("Event Types:", request.event_type)
-    print("Filters:", request.filters)
-    print("Include Attributes:", request.include_attributes)
-    print("Start Timestamp:", request.start_timestamp)
-    print("End Timestamp:", request.end_timestamp)
 
     try:
         filtered_data = process_data(

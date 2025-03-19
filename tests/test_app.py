@@ -9,7 +9,8 @@ def load_test_input(filepath):
         return json.load(file)
 
 def test_filter_data():
-    test_input = load_test_input("tests/sample-input/input1.json")
+    test_input = load_test_input("tests/sample-input/template.json")
+    print(test_input) 
     response = client.post("/filter-data", json=test_input)
     print(response.json())
     assert response.status_code == 200
@@ -19,34 +20,7 @@ def test_filter_data():
     assert isinstance(response_json["filtered_data"], list)
     
     # Check expected filtered events
-    expected_filtered_events = [
-        {
-            "time_object": {
-                "timestamp": "2019-07-21T13:04:40.340101",
-                "duration": 1,
-                "duration_unit": "second",
-                "timezone": "GMT+11"
-            },
-            "event_type": "house sale",
-            "attribute": {
-                "price": 1600000,
-                "suburb": "Balmain"
-            }
-        },
-        {
-            "time_object": {
-                "timestamp": "2019-03-21T18:11:40.340101",
-                "duration": 1,
-                "duration_unit": "second",
-                "timezone": "GMT+11"
-            },
-            "event_type": "house sale",
-            "attribute": {
-                "price": 2800000,
-                "suburb": "Glebe"
-            }
-        }
-    ]
+    expected_filtered_events = [{'time_object': {'timestamp': '20240628', 'duration': 0, 'duration_unit': 'day', 'timezone': 'AEDT'}, 'event_type': 'sales report', 'attribute': {'price': 945000, 'suburb': 'NELSON BAY'}}]
     assert response_json["filtered_data"] == expected_filtered_events
 
 def test_invalid_json():

@@ -7,57 +7,447 @@
             "timestamp": "2023-02-12T07:52:02.921420",
             "timezone": "GMT+11"
         },
-        "events": [
-            {
-                "time_object": {
-                    "timestamp": "2019-07-21T13:04:40.340101",
-                    "duration": 1,
-                    "duration_unit": "second",
-                    "timezone": "GMT+11"
+        "events":
+            [
+                {
+                    "time_object": {
+                        "timestamp": "20240628",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU433785",
+                        "district_code": 10,
+                        "property_id": 3401943,
+                        "price": 945000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "22",
+                        "street_name": "COVENTRY PL",
+                        "suburb": "NELSON BAY",
+                        "postcode": "2315",
+                        "land_area": 291.3,
+                        "area_unit": "M",
+                        "contract_date": "20240628",
+                        "settlement_date": "20240920",
+                        "zoning_code": "R2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
                 },
-                "event_type": "house sale",
-                "attribute": {
-                    "price": 1600000,
-                    "suburb": "Balmain",
-                    "attr3": false
-                }
-            },
-            {
-                "time_object": {
-                    "timestamp": "2019-03-21T18:11:40.340101",
-                    "duration": 1,
-                    "duration_unit": "second",
-                    "timezone": "GMT+11"
+                {
+                    "time_object": {
+                        "timestamp": "20240829",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU448417",
+                        "district_code": 10,
+                        "property_id": 2971727,
+                        "price": 1550000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "10",
+                        "street_name": "JACKSON CL",
+                        "suburb": "SALAMANDER BAY",
+                        "postcode": "2317",
+                        "land_area": 602.6,
+                        "area_unit": "M",
+                        "contract_date": "20240829",
+                        "settlement_date": "20240926",
+                        "zoning_code": "R2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
                 },
-                "event_type": "house sale",
-                "attribute": {
-                    "price": 2800000,
-                    "suburb": "Glebe",
-                    "attr3": false
-                }
-            },
-            {
-                "time_object": {
-                    "timestamp": "2020-06-15T10:30:00.123456",
-                    "duration": 1,
-                    "duration_unit": "second",
-                    "timezone": "GMT+11"
+                {
+                    "time_object": {
+                        "timestamp": "20240813",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU441932",
+                        "district_code": 10,
+                        "property_id": 285585,
+                        "price": 311750,
+                        "property_name": "Unknown",
+                        "unit_number": "10",
+                        "street_number": "324",
+                        "street_name": "SOLDIERS POINT RD",
+                        "suburb": "SALAMANDER BAY",
+                        "postcode": "2317",
+                        "land_area": null,
+                        "area_unit": "",
+                        "contract_date": "20240813",
+                        "settlement_date": "20240924",
+                        "zoning_code": "",
+                        "property_type": "FACTORY",
+                        "sale_type": "3",
+                        "nature_of_property": "10"
+                    }
                 },
-                "event_type": "apartment sale",
-                "attribute": {
-                    "price": 750000,
-                    "suburb": "Parramatta",
-                    "attr3": true
+                {
+                    "time_object": {
+                        "timestamp": "20240729",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU434180",
+                        "district_code": 10,
+                        "property_id": 3564447,
+                        "price": 910000,
+                        "property_name": "THE COVE VILLAGE",
+                        "unit_number": null,
+                        "street_number": "13",
+                        "street_name": "THE COVE DR",
+                        "suburb": "FULLERTON COVE",
+                        "postcode": "2318",
+                        "land_area": 456.1,
+                        "area_unit": "M",
+                        "contract_date": "20240729",
+                        "settlement_date": "20240920",
+                        "zoning_code": "RU2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240812",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU447010",
+                        "district_code": 10,
+                        "property_id": 4570115,
+                        "price": 630000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "19 A",
+                        "street_name": "HENNING RD",
+                        "suburb": "RAYMOND TERRACE",
+                        "postcode": "2324",
+                        "land_area": 379.6,
+                        "area_unit": "M",
+                        "contract_date": "20240812",
+                        "settlement_date": "20240925",
+                        "zoning_code": "R2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240812",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU446993",
+                        "district_code": 10,
+                        "property_id": 4570116,
+                        "price": 618000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "19 B",
+                        "street_name": "HENNING RD",
+                        "suburb": "RAYMOND TERRACE",
+                        "postcode": "2324",
+                        "land_area": 280.6,
+                        "area_unit": "M",
+                        "contract_date": "20240812",
+                        "settlement_date": "20240925",
+                        "zoning_code": "R2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240912",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU435908",
+                        "district_code": 10,
+                        "property_id": 3738587,
+                        "price": 2800000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "649",
+                        "street_name": "EAST SEAHAM RD",
+                        "suburb": "EAST SEAHAM",
+                        "postcode": "2324",
+                        "land_area": 8.048,
+                        "area_unit": "H",
+                        "contract_date": "20240912",
+                        "settlement_date": "20240920",
+                        "zoning_code": "RU1",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240916",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU432722",
+                        "district_code": 10,
+                        "property_id": 264334,
+                        "price": 530000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "5",
+                        "street_name": "KINGSLEY DR",
+                        "suburb": "BOAT HARBOUR",
+                        "postcode": "2316",
+                        "land_area": 741.1,
+                        "area_unit": "M",
+                        "contract_date": "20240916",
+                        "settlement_date": "20240920",
+                        "zoning_code": "R2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240813",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU434002",
+                        "district_code": 10,
+                        "property_id": 276192,
+                        "price": 675000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "9",
+                        "street_name": "BRONZEWING CT",
+                        "suburb": "RAYMOND TERRACE",
+                        "postcode": "2324",
+                        "land_area": 1070.0,
+                        "area_unit": "M",
+                        "contract_date": "20240813",
+                        "settlement_date": "20240920",
+                        "zoning_code": "R2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240809",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU433780",
+                        "district_code": 10,
+                        "property_id": 270742,
+                        "price": 1230000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "1",
+                        "street_name": "AJAX AVE",
+                        "suburb": "NELSON BAY",
+                        "postcode": "2315",
+                        "land_area": 607.0,
+                        "area_unit": "M",
+                        "contract_date": "20240809",
+                        "settlement_date": "20240920",
+                        "zoning_code": "R3",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240622",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU437112",
+                        "district_code": 10,
+                        "property_id": 273514,
+                        "price": 930000,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "58",
+                        "street_name": "PARKES ST",
+                        "suburb": "NELSON BAY",
+                        "postcode": "2315",
+                        "land_area": 1003.0,
+                        "area_unit": "M",
+                        "contract_date": "20240622",
+                        "settlement_date": "20240923",
+                        "zoning_code": "R2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240726",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU433675",
+                        "district_code": 10,
+                        "property_id": 272088,
+                        "price": 830000,
+                        "property_name": "Unknown",
+                        "unit_number": "33",
+                        "street_number": "2",
+                        "street_name": "GOWRIE AVE",
+                        "suburb": "NELSON BAY",
+                        "postcode": "2315",
+                        "land_area": null,
+                        "area_unit": "",
+                        "contract_date": "20240726",
+                        "settlement_date": "20240920",
+                        "zoning_code": "",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": "33"
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240826",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU437015",
+                        "district_code": 10,
+                        "property_id": 272088,
+                        "price": 860000,
+                        "property_name": "Unknown",
+                        "unit_number": "30",
+                        "street_number": "2",
+                        "street_name": "GOWRIE AVE",
+                        "suburb": "NELSON BAY",
+                        "postcode": "2315",
+                        "land_area": null,
+                        "area_unit": "",
+                        "contract_date": "20240826",
+                        "settlement_date": "20240923",
+                        "zoning_code": "",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": "30"
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240809",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU432282",
+                        "district_code": 10,
+                        "property_id": 275401,
+                        "price": 612500,
+                        "property_name": "Unknown",
+                        "unit_number": null,
+                        "street_number": "9",
+                        "street_name": "ACACIA AVE",
+                        "suburb": "RAYMOND TERRACE",
+                        "postcode": "2324",
+                        "land_area": 613.9,
+                        "area_unit": "M",
+                        "contract_date": "20240809",
+                        "settlement_date": "20240920",
+                        "zoning_code": "R2",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": ""
+                    }
+                },
+                {
+                    "time_object": {
+                        "timestamp": "20240815",
+                        "duration": 0,
+                        "duration_unit": "day",
+                        "timezone": "AEDT"
+                    },
+                    "event_type": "sales report",
+                    "attribute": {
+                        "transaction_id": "AU448575",
+                        "district_code": 10,
+                        "property_id": 275607,
+                        "price": 420000,
+                        "property_name": "Unknown",
+                        "unit_number": "1",
+                        "street_number": "8",
+                        "street_name": "AUBERGE CL",
+                        "suburb": "RAYMOND TERRACE",
+                        "postcode": "2324",
+                        "land_area": null,
+                        "area_unit": "",
+                        "contract_date": "20240815",
+                        "settlement_date": "20240926",
+                        "zoning_code": "",
+                        "property_type": "RESIDENCE",
+                        "sale_type": "R",
+                        "nature_of_property": "1"
+                    }
                 }
-            }
         ]
     },
-    "event_type": ["house sale"],
+    "event_type": ["sales report"],
     "filters": [
-        {
-            "attribute": "suburb",
-            "values": ["Balmain", "Glebe"]
-        }
     ],
     "include_attributes": ["price", "suburb"],
     "start_timestamp": "2019-01-01T00:00:00",
