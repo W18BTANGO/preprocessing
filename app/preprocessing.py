@@ -84,6 +84,5 @@ def process_data(
         for event in events
         if event_matches(event)
     ]
-    print(filtered_events)
 
     return filtered_events
