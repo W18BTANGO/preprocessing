@@ -5,40 +5,69 @@ info:
   version: 1.0.0
 
 paths:
-  /datasets/{dataset_id}/values:
-    get:
-      summary: Extract values from dataset
-      description: Extracts values for a specified event type within a time period.
-      parameters:
-        - name: dataset_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: event_type
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: start_date
-          in: query
-          required: false
-          schema:
-            type: string
-            format: date
-        - name: end_date
-          in: query
-          required: false
-          schema:
-            type: string
-            format: date
+  /filter-data:
+    post:
+      summary: Filter data based on criteria
+      description: Filters data based on event type, attributes, and time period.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                json_data:
+                  type: object
+                event_type:
+                  type: array
+                  items:
+                    type: string
+                filters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      attribute:
+                        type: string
+                      values:
+                        type: array
+                        items:
+                          type: string
+                include_attributes:
+                  type: array
+                  items:
+                    type: string
+                start_timestamp:
+                  type: string
+                end_timestamp:
+                  type: string
       responses:
         "200":
-          description: Values extracted successfully
+          description: Data filtered successfully
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  additionalProperties: true
+                type: object
+                properties:
+                  status:
+                    type: string
+                  filtered_data:
+                    type: object
+                    additionalProperties: true
+
+  /:
+    get:
+      summary: Health check endpoint
+      description: Returns the health status of the microservice.
+      responses:
+        "200":
+          description: Health status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  microservice:
+                    type: string
