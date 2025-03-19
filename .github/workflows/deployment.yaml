@@ -15,9 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug AWS Credentials
-        run: aws sts get-caller-identity
-
       - name: Checkout code
         uses: actions/checkout@v3
 
