@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware  # Import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from app.preprocessing import process_data
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Preprocessing API",
@@ -17,6 +18,14 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
 )
 
 class FilterCriteria(BaseModel):
@@ -61,3 +70,7 @@ async def filter_data(request: PreprocessRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+
+@app.get("/")
+def health_check():
+    return {"status": "healthy", "microservice":"preprocessing" }
