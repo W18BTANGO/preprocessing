@@ -1,0 +1,223 @@
+{
+  "json_data": {
+    "data_source": "nsw housing",
+    "dataset_type": "house sales",
+    "dataset_id": "http://example-bucket.s3-website-ap-southeast-2.amazonaws.com",
+    "time_object": {
+      "timestamp": "2024-03-10T14:30:45.123456",
+      "timezone": "AEDT"
+    },
+    "events": [
+      {
+        "time_object": {
+          "timestamp": "2023-06-15T00:00:00",
+          "duration": 0,
+          "duration_unit": "day",
+          "timezone": "AEDT"
+        },
+        "event_type": "sales report",
+        "attribute": {
+          "transaction_id": "AU123456",
+          "district_code": 10,
+          "property_id": 3401001,
+          "price": 845000,
+          "property_name": "Seaside Villa",
+          "unit_number": null,
+          "street_number": "15",
+          "street_name": "OCEAN DR",
+          "suburb": "NELSON BAY",
+          "postcode": "2315",
+          "land_area": 320.5,
+          "area_unit": "M",
+          "contract_date": "2023-06-15",
+          "settlement_date": "2023-08-10",
+          "zoning_code": "R2",
+          "property_type": "RESIDENCE",
+          "sale_type": "R",
+          "nature_of_property": ""
+        }
+      },
+      {
+        "time_object": {
+          "timestamp": "2023-07-28T00:00:00",
+          "duration": 0,
+          "duration_unit": "day",
+          "timezone": "AEDT"
+        },
+        "event_type": "sales report",
+        "attribute": {
+          "transaction_id": "AU123457",
+          "district_code": 10,
+          "property_id": 3401002,
+          "price": 925000,
+          "property_name": "Bay View",
+          "unit_number": null,
+          "street_number": "22",
+          "street_name": "BEACH RD",
+          "suburb": "NELSON BAY",
+          "postcode": "2315",
+          "land_area": 450.0,
+          "area_unit": "M",
+          "contract_date": "2023-07-28",
+          "settlement_date": "2023-09-15",
+          "zoning_code": "R2",
+          "property_type": "RESIDENCE",
+          "sale_type": "R",
+          "nature_of_property": ""
+        }
+      },
+      {
+        "time_object": {
+          "timestamp": "2023-08-10T00:00:00",
+          "duration": 0,
+          "duration_unit": "day",
+          "timezone": "AEDT"
+        },
+        "event_type": "sales report",
+        "attribute": {
+          "transaction_id": "AU123458",
+          "district_code": 10,
+          "property_id": 3401003,
+          "price": 1250000,
+          "property_name": "The Cove",
+          "unit_number": null,
+          "street_number": "8",
+          "street_name": "MARINE PARADE",
+          "suburb": "SALAMANDER BAY",
+          "postcode": "2317",
+          "land_area": 650.0,
+          "area_unit": "M",
+          "contract_date": "2023-08-10",
+          "settlement_date": "2023-10-05",
+          "zoning_code": "R2",
+          "property_type": "RESIDENCE",
+          "sale_type": "R",
+          "nature_of_property": ""
+        }
+      },
+      {
+        "time_object": {
+          "timestamp": "2023-09-05T00:00:00",
+          "duration": 0,
+          "duration_unit": "day",
+          "timezone": "AEDT"
+        },
+        "event_type": "market update",
+        "attribute": {
+          "suburb": "NELSON BAY",
+          "postcode": "2315",
+          "median_price": 890000,
+          "properties_sold": 42,
+          "average_days_on_market": 28,
+          "price_change_percent": 5.2,
+          "period": "quarter"
+        }
+      },
+      {
+        "time_object": {
+          "timestamp": "2023-09-05T00:00:00",
+          "duration": 0,
+          "duration_unit": "day",
+          "timezone": "AEDT"
+        },
+        "event_type": "market update",
+        "attribute": {
+          "suburb": "SALAMANDER BAY",
+          "postcode": "2317",
+          "median_price": 1050000,
+          "properties_sold": 21,
+          "average_days_on_market": 35,
+          "price_change_percent": 3.8,
+          "period": "quarter"
+        }
+      },
+      {
+        "time_object": {
+          "timestamp": "2023-10-20T00:00:00",
+          "duration": 0,
+          "duration_unit": "day",
+          "timezone": "AEDT"
+        },
+        "event_type": "sales report",
+        "attribute": {
+          "transaction_id": "AU123460",
+          "district_code": 10,
+          "property_id": 3401005,
+          "price": 785000,
+          "property_name": "Bay Apartment",
+          "unit_number": "5",
+          "street_number": "120",
+          "street_name": "VICTORIA PARADE",
+          "suburb": "NELSON BAY",
+          "postcode": "2315",
+          "land_area": null,
+          "area_unit": "",
+          "contract_date": "2023-10-20",
+          "settlement_date": "2023-12-08",
+          "zoning_code": "",
+          "property_type": "UNIT",
+          "sale_type": "R",
+          "nature_of_property": ""
+        }
+      },
+      {
+        "time_object": {
+          "timestamp": "2024-01-15T00:00:00",
+          "duration": 0,
+          "duration_unit": "day",
+          "timezone": "AEDT"
+        },
+        "event_type": "sales report",
+        "attribute": {
+          "transaction_id": "AU123461",
+          "district_code": 10,
+          "property_id": 3401006,
+          "price": 1350000,
+          "property_name": "Lighthouse View",
+          "unit_number": null,
+          "street_number": "45",
+          "street_name": "SHOAL BAY RD",
+          "suburb": "SHOAL BAY",
+          "postcode": "2315",
+          "land_area": 520.0,
+          "area_unit": "M",
+          "contract_date": "2024-01-15",
+          "settlement_date": "2024-03-01",
+          "zoning_code": "R2",
+          "property_type": "RESIDENCE",
+          "sale_type": "R",
+          "nature_of_property": ""
+        }
+      },
+      {
+        "time_object": {
+          "timestamp": "2024-02-08T00:00:00",
+          "duration": 0,
+          "duration_unit": "day",
+          "timezone": "AEDT"
+        },
+        "event_type": "sales report",
+        "attribute": {
+          "transaction_id": "AU123462",
+          "district_code": 10,
+          "property_id": 3401007,
+          "price": 920000,
+          "property_name": "Seaside Cottage",
+          "unit_number": null,
+          "street_number": "10",
+          "street_name": "TOMAREE ST",
+          "suburb": "NELSON BAY",
+          "postcode": "2315",
+          "land_area": 380.0,
+          "area_unit": "M",
+          "contract_date": "2024-02-08",
+          "settlement_date": "2024-03-22",
+          "zoning_code": "R2",
+          "property_type": "RESIDENCE",
+          "sale_type": "R",
+          "nature_of_property": ""
+        }
+      }
+    ]
+  }
+} 
