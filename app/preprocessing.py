@@ -2,7 +2,6 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 
 
-
 def process_data(
     data: Dict[str, Any],
     event_types: List[str],  # Updated to support multiple event types
@@ -61,7 +60,8 @@ def process_data(
             attributes = event.get("attribute", {})
             for filter_ in filters:
                 if hasattr(filter_, "attribute") and hasattr(filter_, "values"):
-                    attr_name, allowed_values = filter_.attribute, set(filter_.values)
+                    attr_name = filter_.attribute
+                    allowed_values = set(filter_.values)
                     if (
                         attr_name in attributes
                         and attributes[attr_name] not in allowed_values

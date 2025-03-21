@@ -1,9 +1,8 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware  # Import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from app.preprocessing import process_data
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Preprocessing API",
@@ -28,6 +27,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
+
 class FilterCriteria(BaseModel):
     attribute: str
     values: List[Any]
@@ -35,9 +35,9 @@ class FilterCriteria(BaseModel):
 
 class PreprocessRequest(BaseModel):
     json_data: Dict[str, Any] = None
-    event_type: Optional[List[str]] = []  # Default: No filtering by event type
-    filters: Optional[List[FilterCriteria]] = []  # Default: No filtering
-    include_attributes: Optional[List[str]] = None  # Default: Include all attributes
+    event_type: Optional[List[str]] = []
+    filters: Optional[List[FilterCriteria]] = []
+    include_attributes: Optional[List[str]] = None
     start_timestamp: Optional[str] = None
     end_timestamp: Optional[str] = None
 
@@ -46,12 +46,14 @@ class PreprocessRequest(BaseModel):
 async def filter_data(request: PreprocessRequest):
     if request.json_data is None:
         raise HTTPException(
-            status_code=400, detail="Invalid JSON format: Missing 'json_data' key"
+            status_code=400,
+            detail="Invalid JSON format: Missing 'json_data' key"
         )
 
     if "events" not in request.json_data:
         raise HTTPException(
-            status_code=400, detail="Invalid JSON format: Missing 'events' key"
+            status_code=400,
+            detail="Invalid JSON format: Missing 'events' key"
         )
 
     try:
@@ -70,7 +72,6 @@ async def filter_data(request: PreprocessRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
 @app.get("/")
 def health_check():
-    return {"status": "healthy", "microservice":"preprocessing" }
+    return {"status": "healthy", "microservice": "preprocessing"}
