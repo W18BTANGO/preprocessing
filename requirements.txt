@@ -16,6 +16,7 @@ pluggy==1.5.0
 pydantic==2.10.6
 pydantic_core==2.27.2
 pytest==8.3.5
+pytest-cov
 python-dateutil==2.9.0.post0
 pytz==2025.1
 requests==2.32.3
@@ -26,3 +27,4 @@ typing_extensions==4.12.2
 tzdata==2025.1
 urllib3<2.0.0
 uvicorn
+mypy
