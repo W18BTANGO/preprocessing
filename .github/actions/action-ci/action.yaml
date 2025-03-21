@@ -12,6 +12,5 @@ runs:
       shell: bash
 
     - name: Run type checking
-        run: |
-          mypy app/
+        run: mypy app/
         shell: bash
