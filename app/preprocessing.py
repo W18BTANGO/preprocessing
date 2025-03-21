@@ -78,7 +78,7 @@ def process_data(
             "attribute": {
                 key: value
                 for key, value in event.get("attribute", {}).items()
-                if key in include_attributes
+                if key in include_attributes # type: ignore
             },
         }
         for event in events

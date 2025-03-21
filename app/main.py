@@ -34,7 +34,7 @@ class FilterCriteria(BaseModel):
 
 
 class PreprocessRequest(BaseModel):
-    json_data: Dict[str, Any] = None
+    json_data: Dict[str, Any] = None # type: ignore
     event_type: Optional[List[str]] = []
     filters: Optional[List[FilterCriteria]] = []
     include_attributes: Optional[List[str]] = None
