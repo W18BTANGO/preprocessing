@@ -4,11 +4,26 @@ info:
   description: API for extracting specific values from datasets
   version: 1.0.0
 
+servers:
+  - url: http://preprocessing-681292228.ap-southeast-2.elb.amazonaws.com
+    description: Production server
+
 paths:
   /filter-data:
     post:
       summary: Filter data based on criteria
-      description: Filters data based on event type, attributes, and time period.
+      description: |
+        Filters a dataset based on event type, attribute filters, and a time range.
+        
+        The request body should contain:
+        - `json_data`: Any data in the ADAGE 3.0 format
+        - `event_type`: Array of event types to filter by
+        - `filters`: Array of filter objects with attribute and values to filter by
+        - `include_attributes`: Array of attributes to include in the response
+        - `start_timestamp`: Start timestamp for filtering events (optional)
+        - `end_timestamp`: End timestamp for filtering events (optional)
+        
+        Returns a list of filtered events with the specified attributes.
       requestBody:
         required: true
         content:
@@ -41,6 +56,97 @@ paths:
                   type: string
                 end_timestamp:
                   type: string
+            example:
+              json_data:
+                data_source: "nsw housing"
+                dataset_type: "house sales"
+                dataset_id: "http://bucket-name.s3-website-Region.amazonaws.com"
+                time_object:
+                  timestamp: "2023-02-12T07:52:02.921420"
+                  timezone: "GMT+11"
+                events:
+                  - time_object:
+                      timestamp: "20240628"
+                      duration: 0
+                      duration_unit: "day"
+                      timezone: "AEDT"
+                    event_type: "sales report"
+                    attribute:
+                      transaction_id: "AU433785"
+                      district_code: 10
+                      property_id: 3401943
+                      price: 945000
+                      property_name: "Unknown"
+                      unit_number: null
+                      street_number: "22"
+                      street_name: "COVENTRY PL"
+                      suburb: "NELSON BAY"
+                      postcode: "2315"
+                      land_area: 291.3
+                      area_unit: "M"
+                      contract_date: "20240628"
+                      settlement_date: "20240920"
+                      zoning_code: "R2"
+                      property_type: "RESIDENCE"
+                      sale_type: "R"
+                      nature_of_property: ""
+                  - time_object:
+                      timestamp: "20240829"
+                      duration: 0
+                      duration_unit: "day"
+                      timezone: "AEDT"
+                    event_type: "sales report"
+                    attribute:
+                      transaction_id: "AU448417"
+                      district_code: 10
+                      property_id: 2971727
+                      price: 1550000
+                      property_name: "Unknown"
+                      unit_number: null
+                      street_number: "10"
+                      street_name: "JACKSON CL"
+                      suburb: "SALAMANDER BAY"
+                      postcode: "2317"
+                      land_area: 602.6
+                      area_unit: "M"
+                      contract_date: "20240829"
+                      settlement_date: "20240926"
+                      zoning_code: "R2"
+                      property_type: "RESIDENCE"
+                      sale_type: "R"
+                      nature_of_property: ""
+                  - time_object:
+                      timestamp: "20240813"
+                      duration: 0
+                      duration_unit: "day"
+                      timezone: "AEDT"
+                    event_type: "sales report"
+                    attribute:
+                      transaction_id: "AU441932"
+                      district_code: 10
+                      property_id: 285585
+                      price: 311750
+                      property_name: "Unknown"
+                      unit_number: "10"
+                      street_number: "324"
+                      street_name: "SOLDIERS POINT RD"
+                      suburb: "SALAMANDER BAY"
+                      postcode: "2317"
+                      land_area: null
+                      area_unit: ""
+                      contract_date: "20240813"
+                      settlement_date: "20240924"
+                      zoning_code: ""
+                      property_type: "FACTORY"
+                      sale_type: "3"
+                      nature_of_property: "10"
+              event_type: ["sales report"]
+              filters:
+                - attribute: "suburb"
+                  values: ["NELSON BAY"]
+              include_attributes: ["price", "suburb"]
+              start_timestamp: "2023-01-01T00:00:00"
+              end_timestamp: "2025-01-01T00:00:00"
       responses:
         "200":
           description: Data filtered successfully
@@ -51,23 +157,55 @@ paths:
                 properties:
                   status:
                     type: string
+                    example: "success"
                   filtered_data:
-                    type: object
-                    additionalProperties: true
-
-  /:
-    get:
-      summary: Health check endpoint
-      description: Returns the health status of the microservice.
-      responses:
-        "200":
-          description: Health status
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time_object:
+                          type: object
+                          properties:
+                            timestamp:
+                              type: string
+                            duration:
+                              type: integer
+                            duration_unit:
+                              type: string
+                            timezone:
+                              type: string
+                        event_type:
+                          type: string
+                        attribute:
+                          type: object
+                          additionalProperties: true
+                    example:
+                      - time_object:
+                          timestamp: "20240628"
+                          duration: 0
+                          duration_unit: "day"
+                          timezone: "AEDT"
+                        event_type: "sales report"
+                        attribute:
+                          price: 945000
+                          suburb: "NELSON BAY"
+        "400":
+          description: Bad Request - Invalid input data
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  status:
+                  detail:
                     type: string
-                  microservice:
+                    example: "Invalid JSON format: Missing 'json_data' key"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
                     type: string
+                    example: "Error processing the request"
