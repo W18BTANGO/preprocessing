@@ -64,4 +64,4 @@ jobs:
           pip install pytest
 
       - name: Run unit tests
-        run: pytest /Users/abbieworswick/preprocessing/tests
+        run: pytest tests
