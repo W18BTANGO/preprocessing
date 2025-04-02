@@ -8,11 +8,8 @@ app = FastAPI(title="Preprocessing API", description="API for extracting specifi
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods, including OPTIONS
-    allow_headers=["*"],  # Allow all headers
 )
+
 
 class FilterCriteria(BaseModel):
     attribute: str
