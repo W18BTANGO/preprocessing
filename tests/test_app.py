@@ -23,7 +23,7 @@ def test_health_check():
     """Test the health check endpoint."""
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"status": "healthy", "microservice": "preprocessing"}
+    assert response.json() == {"status": "healthy", "microservice": "preprocessing", "updated": "02/04/2025"}
 
 def test_filter_data():
     """Test filtering data with valid inputs."""

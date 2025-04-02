@@ -28,7 +28,7 @@ class PreprocessRequest(BaseModel):
 @app.get("/")
 def health_check():
     """Health check endpoint."""
-    return {"status": "healthy", "microservice": "preprocessing"}
+    return {"status": "healthy", "microservice": "preprocessing", "updated": "02/04/2025"}
 
 
 @app.post("/filter-data")

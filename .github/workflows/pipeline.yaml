@@ -5,77 +5,26 @@ on:
     branches:
       - main
       - setup_CI
+      - combine_pipelines
   pull_request:
     branches:
       - main
 
 jobs:
-  continuous_integration:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  run-ci:
+    uses: W18BTANGO/ci-cd/.github/workflows/integrate.yaml@main
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run CI steps
-        uses: ./.github/actions/action-ci 
-
-  continuous_deployment:
-    runs-on: ubuntu-latest
-    needs: continuous_integration
-    env:
-      AWS_REGION: ap-southeast-2
-      ECR_REPOSITORY: preprocessing
-      IMAGE_TAG: latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run CD steps
-        uses: ./.github/actions/action-cd
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest pytest-cov
-
-      - name: Run unit tests with coverage
-        run: |
-          pytest --cov=app --cov-report=html --cov-report=xml --cov-fail-under=85 --junitxml=report.xml tests
-
-      - name: Verify coverage report directory
-        run: |
-          if [ ! -d "htmlcov" ]; then
-            echo "Error: htmlcov/ directory not found. Ensure tests pass and --cov-report=html is enabled."
-            exit 1
-          fi
-
-      - name: Upload coverage report
-        uses: actions/upload-pages-artifact@v3
-        with:
-          name: coverage-report
-          path: htmlcov/
+  deploy:
+    needs: run-ci
+    uses:  W18BTANGO/ci-cd/.github/workflows/deploy.yaml@main
+    with:
+      aws-region: ap-southeast-2                        
+      ecr-repository: preprocessing               
+      ecs-service: preprocessingService                  
+      ecs-cluster: PreprocessingClusterEC2                  
+      ecs-task-definition: .aws/ptd1-revision1.json              
+      container-name: preprocessing                     
+                                                        
+    secrets:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
