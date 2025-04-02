@@ -15,6 +15,7 @@ class FilterCriteria(BaseModel):
     attribute: str
     values: List[Any]
 
+
 class PreprocessRequest(BaseModel):
     json_data: Dict[str, Any]
     event_type: Optional[List[str]] = []  # Default: No filtering by event type
@@ -23,10 +24,12 @@ class PreprocessRequest(BaseModel):
     start_timestamp: Optional[str] = None  # Default: No time range filtering
     end_timestamp: Optional[str] = None  # Default: No time range filtering
 
+
 @app.get("/")
 def health_check():
     """Health check endpoint."""
     return {"status": "healthy", "microservice": "preprocessing"}
+
 
 @app.post("/filter-data")
 async def filter_data(request: PreprocessRequest):
@@ -35,10 +38,10 @@ async def filter_data(request: PreprocessRequest):
     """
     if not request.json_data:
         raise HTTPException(status_code=400, detail="No JSON data provided")
-    
+
     if "events" not in request.json_data:
         raise HTTPException(status_code=400, detail="Invalid JSON format: Missing 'events' key")
-    
+
     try:
         filtered_data = process_data(
             data=request.json_data,
