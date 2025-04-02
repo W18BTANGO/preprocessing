@@ -67,7 +67,7 @@ jobs:
         run: |
           pytest --cov=app --cov-report=xml --cov-fail-under=85 --junitxml=report.xml tests
       - name: Upload coverage report
-        uses: actions/upload-artifact@v3  # Replace <commit-sha> with the latest commit SHAge  # Use v2 if v3 is unavailable
+        uses: actions/upload-pages-artifact@v3  # Upgraded to v3
         with:
           name: coverage-report
           path: htmlcov/
