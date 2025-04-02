@@ -1,30 +1,13 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from app.preprocessing import process_data
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(
-    title="Preprocessing API",
-    description="API for extracting specific values from datasets",
-    version="1.0.0",
-)
-
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods
-    allow_headers=["*"],  # Allow all headers
-)
+app = FastAPI(title="Preprocessing API", description="API for extracting specific values from datasets", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
 )
 
 
@@ -34,44 +17,42 @@ class FilterCriteria(BaseModel):
 
 
 class PreprocessRequest(BaseModel):
-    json_data: Dict[str, Any] = None  # type: ignore
-    event_type: Optional[List[str]] = []
-    filters: Optional[List[FilterCriteria]] = []
-    include_attributes: Optional[List[str]] = None
-    start_timestamp: Optional[str] = None
-    end_timestamp: Optional[str] = None
-
-
-@app.post("/filter-data")
-async def filter_data(request: PreprocessRequest):
-    if request.json_data is None:
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid JSON format: Missing 'json_data' key"
-        )
-
-    if "events" not in request.json_data:
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid JSON format: Missing 'events' key"
-        )
-
-    try:
-        filtered_data = process_data(
-            request.json_data,
-            request.event_type or [],
-            request.filters or None,
-            request.include_attributes or None,
-            request.start_timestamp,
-            request.end_timestamp,
-        )
-        print("Filtered Data:", filtered_data)  # Debug output
-        return {"status": "success", "filtered_data": filtered_data}
-    except Exception as e:
-        print("Error:", str(e))  # Print error details
-        raise HTTPException(status_code=500, detail=str(e))
+    json_data: Dict[str, Any]
+    event_type: Optional[List[str]] = []  # Default: No filtering by event type
+    filters: Optional[List[FilterCriteria]] = []  # Default: No filtering
+    include_attributes: Optional[List[str]] = None  # Default: Include all attributes
+    start_timestamp: Optional[str] = None  # Default: No time range filtering
+    end_timestamp: Optional[str] = None  # Default: No time range filtering
 
 
 @app.get("/")
 def health_check():
+    """Health check endpoint."""
     return {"status": "healthy", "microservice": "preprocessing"}
+
+
+@app.post("/filter-data")
+async def filter_data(request: PreprocessRequest):
+    """
+    Filters a dataset based on event type, attributes, and a time range.
+    """
+    if not request.json_data:
+        raise HTTPException(status_code=400, detail="No JSON data provided")
+
+    if "events" not in request.json_data:
+        raise HTTPException(status_code=400, detail="Invalid JSON format: Missing 'events' key")
+
+    try:
+        filtered_data = process_data(
+            data=request.json_data,
+            event_types=request.event_type or [],
+            filters=request.filters or [],
+            include_attributes=request.include_attributes or [],
+            start_timestamp=request.start_timestamp,
+            end_timestamp=request.end_timestamp,
+        )
+        return {"status": "success", "filtered_data": filtered_data}
+    except ValueError as ve:
+        raise HTTPException(status_code=500, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

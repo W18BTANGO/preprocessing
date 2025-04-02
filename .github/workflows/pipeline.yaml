@@ -65,4 +65,17 @@ jobs:
 
       - name: Run unit tests with coverage
         run: |
-          pytest --cov=app --cov-fail-under=85 tests
+          pytest --cov=app --cov-report=html --cov-report=xml --cov-fail-under=85 --junitxml=report.xml tests
+
+      - name: Verify coverage report directory
+        run: |
+          if [ ! -d "htmlcov" ]; then
+            echo "Error: htmlcov/ directory not found. Ensure tests pass and --cov-report=html is enabled."
+            exit 1
+          fi
+
+      - name: Upload coverage report
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: coverage-report
+          path: htmlcov/
