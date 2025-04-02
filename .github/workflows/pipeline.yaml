@@ -65,4 +65,9 @@ jobs:
 
       - name: Run unit tests with coverage
         run: |
-          pytest --cov=app --cov-fail-under=85 tests
+          pytest --cov=app --cov-report=xml --cov-fail-under=85 --junitxml=report.xml tests
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: htmlcov/
