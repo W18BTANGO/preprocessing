@@ -62,10 +62,7 @@ def process_data(
                 if hasattr(filter_, "attribute") and hasattr(filter_, "values"):
                     attr_name = filter_.attribute
                     allowed_values = set(filter_.values)
-                    if (
-                        attr_name in attributes
-                        and attributes[attr_name] not in allowed_values
-                    ):
+                    if attr_name not in attributes or attributes[attr_name] not in allowed_values:
                         return False
 
         return True
@@ -78,7 +75,7 @@ def process_data(
             "attribute": {
                 key: value
                 for key, value in event.get("attribute", {}).items()
-                if key in include_attributes  # type: ignore
+                if not include_attributes or key in include_attributes
             },
         }
         for event in events
