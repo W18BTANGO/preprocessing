@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - setup_CI
   pull_request:
     branches:
       - main
@@ -15,7 +14,7 @@ jobs:
 
   deploy:
     needs: [run-ci]
-    uses:  W18BTANGO/ci-cd/.github/workflows/deployment.yaml@main
+    uses:  W18BTANGO/ci-cd/.github/workflows/deploy-prod.yaml@main
     with:
       aws-region: ap-southeast-2                        
       ecr-repository: preprocessing               
