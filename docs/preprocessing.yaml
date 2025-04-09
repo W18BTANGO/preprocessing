@@ -62,11 +62,11 @@ paths:
                 dataset_type: "house sales"
                 dataset_id: "http://bucket-name.s3-website-Region.amazonaws.com"
                 time_object:
-                  timestamp: "2023-02-12T07:52:02.921420"
+                  timestamp: "2023-02-12 07:52:02.921420"
                   timezone: "GMT+11"
                 events:
                   - time_object:
-                      timestamp: "20240628"
+                      timestamp: "2019-07-21 13:04:40.3401012"
                       duration: 0
                       duration_unit: "day"
                       timezone: "AEDT"
@@ -91,7 +91,7 @@ paths:
                       sale_type: "R"
                       nature_of_property: ""
                   - time_object:
-                      timestamp: "20240829"
+                      timestamp: "2019-07-22 09:15:22.1234567"
                       duration: 0
                       duration_unit: "day"
                       timezone: "AEDT"
@@ -116,7 +116,7 @@ paths:
                       sale_type: "R"
                       nature_of_property: ""
                   - time_object:
-                      timestamp: "20240813"
+                      timestamp: "2019-07-23 15:30:45.9876543"
                       duration: 0
                       duration_unit: "day"
                       timezone: "AEDT"
@@ -145,8 +145,8 @@ paths:
                 - attribute: "suburb"
                   values: ["NELSON BAY"]
               include_attributes: ["price", "suburb"]
-              start_timestamp: "2023-01-01T00:00:00"
-              end_timestamp: "2025-01-01T00:00:00"
+              start_timestamp: "2019-07-21 12:00:00.0000000"
+              end_timestamp: "2019-07-23 23:59:59.9999999"
       responses:
         "200":
           description: Data filtered successfully
@@ -181,7 +181,7 @@ paths:
                           additionalProperties: true
                     example:
                       - time_object:
-                          timestamp: "20240628"
+                          timestamp: "2019-07-21 13:04:40.3401012"
                           duration: 0
                           duration_unit: "day"
                           timezone: "AEDT"

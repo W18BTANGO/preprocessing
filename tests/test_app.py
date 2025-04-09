@@ -88,6 +88,32 @@ def test_invalid_timestamp():
     assert response.status_code == 500
     assert "Invalid start_timestamp format" in response.json()["detail"]
 
+def test_filter_data_with_space_separated_timestamps():
+    """Test filtering data with space-separated timestamp format."""
+    test_input = {
+        "json_data": {
+            "events": [
+                {
+                    "time_object": {"timestamp": "2019-07-21 13:04:40.3401012"}, 
+                    "event_type": "sales report", 
+                    "attribute": {"price": 845000, "suburb": "MANLY"}
+                },
+                {
+                    "time_object": {"timestamp": "2019-07-22 09:15:22.1234567"}, 
+                    "event_type": "sales report", 
+                    "attribute": {"price": 1350000, "suburb": "BONDI"}
+                }
+            ]
+        },
+        "event_type": ["sales report"],
+        "include_attributes": ["price", "suburb"],
+        "start_timestamp": "2019-07-21 13:00:00",
+        "end_timestamp": "2019-07-21 14:00:00"
+    }
+    response = client.post("/filter-data", json=test_input)
+    assert response.status_code == 200
+    assert len(response.json()["filtered_data"]) == 1
+    assert response.json()["filtered_data"][0]["attribute"]["suburb"] == "MANLY"
 
 class TestProcessData:
     """Unit tests for the process_data function."""
