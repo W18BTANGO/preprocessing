@@ -8,8 +8,6 @@ app = FastAPI(
     title="Preprocessing API",
     description="API for extracting specific values from datasets",
     version="1.0.0",
-    ssl_certfile="../cert.pem",
-    ssl_keyfile="../key.pem",
 )
 
 
