@@ -1,10 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
-from app.preprocessing import process_data
+from preprocessing import process_data
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="Preprocessing API", description="API for extracting specific values from datasets", version="1.0.0")
+app = FastAPI(
+    title="Preprocessing API",
+    description="API for extracting specific values from datasets",
+    version="1.0.0",
+)
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -60,3 +65,14 @@ async def filter_data(request: PreprocessRequest):
         raise HTTPException(status_code=500, detail=str(ve))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        app,
+        host="0.0.0.0",  # Accepts connections from any network interface
+        port=8000,
+        ssl_keyfile="../key.pem",       # Path to your private key file
+        ssl_certfile="../cert.pem",     # Path to your certificate file
+    )
